@@ -44,8 +44,8 @@ devDependencies:
     specifier: ^11.1.0
     version: 11.1.0
   '@types/conventional-changelog-preset-loader':
-    specifier: ^2.3.3
-    version: 2.3.3
+    specifier: ^2.3.4
+    version: 2.3.4
   '@types/conventional-commits-parser':
     specifier: ^3.0.4
     version: 3.0.4
@@ -293,8 +293,8 @@ packages:
       '@types/node': 20.6.1
       '@types/normalize-package-data': 2.4.1
 
-  /@types/conventional-changelog-preset-loader@2.3.3:
-    resolution: {integrity: sha512-x+RULOu4j0xZi4J2oS4fWJ+2nK9NfZ6SxEZ7xW7PX7DRFyOxy1DQEwxo4Vwh5cqS/Dz6RNQWSPg7eshvIJu51w==}
+  /@types/conventional-changelog-preset-loader@2.3.4:
+    resolution: {integrity: sha512-Ke8+QrYiAXPAuxaKJgps2oTHOBPcC7svj4cp9OpkdShgytD5Z+aC5sUdo340gsTe7HqvvyeHAHxmMuwEAq2GYQ==}
     dependencies:
       '@types/conventional-changelog-core': 4.2.4
       '@types/conventional-changelog-writer': 4.0.6

@@ -11,7 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "@octokit/types": "^11.1.0",
-    "@types/conventional-changelog-preset-loader": "^2.3.3",
+    "@types/conventional-changelog-preset-loader": "^2.3.4",
     "@types/conventional-commits-parser": "^3.0.4",
     "@types/semver": "^7.5.2",
     "@vercel/ncc": "^0.38.0",

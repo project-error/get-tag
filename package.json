@@ -1,0 +1,33 @@
+{
+  "name": "get-tag",
+  "version": "1.0.0",
+  "description": "Get Tag action for Project Error projects",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.ts --license licenses.txt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@octokit/types": "^11.1.0",
+    "@types/conventional-changelog-preset-loader": "^2.3.3",
+    "@types/conventional-commits-parser": "^3.0.4",
+    "@types/semver": "^7.5.2",
+    "@vercel/ncc": "^0.38.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^5.1.1",
+    "@conventional-commits/parser": "^0.4.1",
+    "@octokit/rest": "^20.0.1",
+    "@types/conventional-recommended-bump": "^6.1.1",
+    "conventional-changelog-angular": "^7.0.0",
+    "conventional-changelog-preset-loader": "^4.1.0",
+    "conventional-commits-parser": "^5.0.0",
+    "conventional-recommended-bump": "^9.0.0",
+    "recommended-bump": "^1.5.2",
+    "semver": "^7.5.4"
+  }
+}

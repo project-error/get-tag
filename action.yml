@@ -1,0 +1,15 @@
+name: "Project Error Get Tag"
+description: "Action for getting new release tag"
+inputs:
+  prerelease:
+    description: "If the release is a pre release"
+    required: false
+  environment:
+    description: "The environment for the release"
+    required: false
+outputs:
+  release_tag:
+    description: "New release tag"
+runs:
+  using: "node20"
+  main: "dist/index.js"

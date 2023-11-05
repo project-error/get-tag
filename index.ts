@@ -101,7 +101,6 @@ export async function main() {
         args.environment,
       );
       core.info(`New release tag: ${newReleaseTag}`);
-
       core.setOutput("release_tag", newReleaseTag);
     }
   } catch (err) {
@@ -124,16 +123,14 @@ const createNewReleaseTag = async (
 
   core.info(`Next semver bump: ${increment}`);
 
-  const currentDate = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-
   if (environment === "dev") {
     if (!increment) {
       core.info("New prerelease bump");
-      return semverInc(currentTag, "prerelease", `beta.${currentDate}`);
+      return semverInc(currentTag, "prerelease", `beta`);
     }
 
     const preinc = ("pre" + increment) as ReleaseType;
-    const preTag = semverInc(currentTag, preinc, `beta.${currentDate}`);
+    const preTag = semverInc(currentTag, preinc, `beta`);
 
     core.info(`New pre-release tag: ${preTag}`);
     return preTag;

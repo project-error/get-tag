@@ -10633,14 +10633,13 @@ exports.main = main;
 const createNewReleaseTag = async (currentTag, commits, environment) => {
     let increment = (0, utils_1.getNextSemverBump)(commits, environment);
     core.info(`Next semver bump: ${increment}`);
-    const currentDate = new Date().toISOString().slice(0, 10).replace(/-/g, "");
     if (environment === "dev") {
         if (!increment) {
             core.info("New prerelease bump");
-            return (0, inc_1.default)(currentTag, "prerelease", `beta.${currentDate}`);
+            return (0, inc_1.default)(currentTag, "prerelease", `beta`);
         }
         const preinc = ("pre" + increment);
-        const preTag = (0, inc_1.default)(currentTag, preinc, `beta.${currentDate}`);
+        const preTag = (0, inc_1.default)(currentTag, preinc, `beta`);
         core.info(`New pre-release tag: ${preTag}`);
         return preTag;
     }

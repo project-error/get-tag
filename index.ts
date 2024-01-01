@@ -39,7 +39,7 @@ export async function main() {
 
     if (!args.repoToken) {
       core.setFailed(
-        "No repo token specified. Please set the GITHUB_TOKEN environment variable.",
+        "No repo token specified. Please set the GITHUB_TOKEN environment variable."
       );
       return;
     }
@@ -62,7 +62,7 @@ export async function main() {
             owner: context.repo.owner,
             repo: context.repo.repo,
           },
-          args.environment,
+          args.environment
         );
 
     core.info(`Previous release tag: ${previousReleaseTag}`);
@@ -75,14 +75,14 @@ export async function main() {
         repo: context.repo.repo,
         ref: `tags/${previousReleaseTag}`,
       },
-      context.sha,
+      context.sha
     );
 
     const parsedCommits = await parseCommits(
       octokit,
       context.repo.owner,
       context.repo.repo,
-      commitsSinceRelease,
+      commitsSinceRelease
     );
 
     core.info(`Found ${commitsSinceRelease.length} commits since last release`);
@@ -98,7 +98,7 @@ export async function main() {
       const newReleaseTag = await createNewReleaseTag(
         latestReleaseTag,
         parsedCommits,
-        args.environment,
+        args.environment
       );
       core.info(`New release tag: ${newReleaseTag}`);
       core.setOutput("release_tag", newReleaseTag);
@@ -117,23 +117,15 @@ export async function main() {
 const createNewReleaseTag = async (
   currentTag: string,
   commits: ParsedCommit[],
-  environment: "dev" | "prod",
+  environment: "dev" | "prod"
 ) => {
   let increment = getNextSemverBump(commits, environment);
 
   core.info(`Next semver bump: ${increment}`);
 
   if (environment === "dev") {
-    if (!increment) {
-      core.info("New prerelease bump");
-      return semverInc(currentTag, "prerelease", `beta`);
-    }
-
-    const preinc = ("pre" + increment) as ReleaseType;
-    const preTag = semverInc(currentTag, preinc, `beta`);
-
-    core.info(`New pre-release tag: ${preTag}`);
-    return preTag;
+    core.info("New prerelease bump");
+    return semverInc(currentTag, "prerelease", `beta`);
   }
 
   // @ts-ignore
@@ -142,7 +134,7 @@ const createNewReleaseTag = async (
 
 async function searchForPreviousReleaseTag(
   octokit: OctokitClient,
-  tagInfo: ReposListTagsParams,
+  tagInfo: ReposListTagsParams
 ) {
   const listTagsOptions = octokit.repos.listTags.endpoint.merge(tagInfo);
   const tl = await octokit.paginate(listTagsOptions);
@@ -165,7 +157,7 @@ async function searchForPreviousReleaseTag(
 async function searchForPreviousEnvironmentReleaseTag(
   octokit: OctokitClient,
   tagInfo: ReposListTagsParams,
-  environment: "dev" | "prod",
+  environment: "dev" | "prod"
 ) {
   const listTagsOptions = octokit.repos.listTags.endpoint.merge(tagInfo);
   const tl = await octokit.paginate(listTagsOptions);
@@ -220,7 +212,7 @@ async function searchForPreviousEnvironmentReleaseTag(
 async function getCommitsSinceRelease(
   octokit: OctokitClient,
   tagInfo: GitGetRefParams,
-  currentSha: string,
+  currentSha: string
 ) {
   core.startGroup("Fetching commit history");
   let resp;
@@ -233,7 +225,7 @@ async function getCommitsSinceRelease(
     previousReleaseRef = parseGitTag(tagInfo.ref);
   } catch (err) {
     core.info(
-      `Could not find SHA for release tag ${tagInfo.ref}. Assuming this is the first release.`,
+      `Could not find SHA for release tag ${tagInfo.ref}. Assuming this is the first release.`
     );
     previousReleaseRef = "HEAD";
   }
@@ -250,7 +242,7 @@ async function getCommitsSinceRelease(
     core.info(`Found ${resp.data.commits.length} commits since last release`);
   } catch (err) {
     core.warning(
-      `Could not fetch commits between ${previousReleaseRef} and ${currentSha}`,
+      `Could not fetch commits between ${previousReleaseRef} and ${currentSha}`
     );
   }
 
@@ -279,7 +271,7 @@ async function parseCommits(
   octokit: OctokitClient,
   owner: string,
   repo: string,
-  commits: BaseheadCommits["data"]["commits"],
+  commits: BaseheadCommits["data"]["commits"]
 ) {
   const parsedCommits: ParsedCommit[] = [];
 
@@ -294,7 +286,7 @@ async function parseCommits(
 
     if (pulls.data.length) {
       core.info(
-        `Found ${pulls.data.length} pull request(s) associated with commit ${commit.sha}`,
+        `Found ${pulls.data.length} pull request(s) associated with commit ${commit.sha}`
       );
     }
 
@@ -303,7 +295,7 @@ async function parseCommits(
       {
         mergePattern: /^Merge pull request #(\d+) from (.*)$/,
         revertPattern: /^Revert \"([\s\S]*)\"$/,
-      },
+      }
     );
 
     if (changelogCommit.merge) {
@@ -329,7 +321,7 @@ async function parseCommits(
 
 async function createGithubTag(
   octokit: OctokitClient,
-  refInfo: CreateRefParams,
+  refInfo: CreateRefParams
 ) {
   core.startGroup("Creating release tag");
 

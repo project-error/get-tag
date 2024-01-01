@@ -10634,14 +10634,8 @@ const createNewReleaseTag = async (currentTag, commits, environment) => {
     let increment = (0, utils_1.getNextSemverBump)(commits, environment);
     core.info(`Next semver bump: ${increment}`);
     if (environment === "dev") {
-        if (!increment) {
-            core.info("New prerelease bump");
-            return (0, inc_1.default)(currentTag, "prerelease", `beta`);
-        }
-        const preinc = ("pre" + increment);
-        const preTag = (0, inc_1.default)(currentTag, preinc, `beta`);
-        core.info(`New pre-release tag: ${preTag}`);
-        return preTag;
+        core.info("New prerelease bump");
+        return (0, inc_1.default)(currentTag, "prerelease", `beta`);
     }
     // @ts-ignore
     return (0, inc_1.default)(currentTag, increment);
